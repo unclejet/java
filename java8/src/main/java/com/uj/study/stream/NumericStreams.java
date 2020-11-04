@@ -1,10 +1,13 @@
 package com.uj.study.stream;
 
+import com.uj.study.model.lambdasinaction.Album;
 import com.uj.study.model.lambdasinaction.Dish;
+import com.uj.study.model.lambdasinaction.Order;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.OptionalInt;
+import java.util.function.ToLongFunction;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -34,6 +37,8 @@ public class NumericStreams {
                 .sum();
         System.out.println("Number of calories:" + calories);
     }
+
+
 
     /**
      * boxed()
@@ -115,6 +120,65 @@ public class NumericStreams {
                         .flatMap(a -> IntStream.rangeClosed(a, 100)
                                         .mapToObj(b -> new double[]{a, b, Math.sqrt(a * a + b * b)})
                                         .filter(t -> t[2] % 1 == 0));
+
+    }
+
+
+    public class OrderStreams extends Order {
+
+        public OrderStreams(List<Album> albums) {
+            super(albums);
+        }
+
+        // BEGIN body
+        public long countRunningTime() {
+            return albums.stream()
+                    .mapToLong(album -> album.getTracks().mapToLong(track -> track.getLength())
+                            .sum()).sum();
+        }
+
+        public long countMusicians() {
+            return albums.stream()
+                    .mapToLong(album -> album.getMusicians().count())
+                    .sum();
+        }
+
+        public long countTracks() {
+            return albums.stream()
+                    .mapToLong(album -> album.getTracks().count())
+                    .sum();
+        }
+        // END body
+
+    }
+
+    public class OrderDomain extends Order {
+
+        public OrderDomain(List<Album> albums) {
+            super(albums);
+        }
+
+        // BEGIN body
+        public long countFeature(ToLongFunction<Album> function) {
+            return albums.stream()
+                    .mapToLong(function)
+                    .sum();
+        }
+
+        public long countTracks() {
+            return countFeature(album -> album.getTracks().count());
+        }
+
+        public long countRunningTime() {
+            return countFeature(album -> album.getTracks()
+                    .mapToLong(track -> track.getLength())
+                    .sum());
+        }
+
+        public long countMusicians() {
+            return countFeature(album -> album.getMusicians().count());
+        }
+// END body
 
     }
 

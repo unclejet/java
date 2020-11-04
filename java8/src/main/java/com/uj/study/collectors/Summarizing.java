@@ -1,5 +1,6 @@
 package com.uj.study.collectors;
 
+import com.uj.study.model.lambdasinaction.Album;
 import com.uj.study.model.lambdasinaction.Dish;
 import com.uj.study.model.lambdasinaction.Transaction;
 
@@ -108,6 +109,23 @@ public class Summarizing {
      */
     private static IntSummaryStatistics calculateMenuStatistics() {
         return menu.stream().collect(summarizingInt(Dish::getCalories));
+    }
+
+    /**mapToInt()
+     * summaryStatistics
+     * @param album
+     */
+    public static void printTrackLengthStatistics(Album album) {
+        IntSummaryStatistics trackLengthStats
+                = album.getTracks()
+                .mapToInt(track -> track.getLength())
+                .summaryStatistics();
+
+        System.out.printf("Max: %d, Min: %d, Ave: %f, Sum: %d",
+                trackLengthStats.getMax(),
+                trackLengthStats.getMin(),
+                trackLengthStats.getAverage(),
+                trackLengthStats.getSum());
     }
 
     /**

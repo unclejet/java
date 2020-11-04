@@ -1,11 +1,11 @@
 package com.uj.study.collectors;
 
+import com.uj.study.model.lambdasinaction.Album;
+import com.uj.study.model.lambdasinaction.Artist;
 import com.uj.study.model.lambdasinaction.Dish;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Stream;
 
 import static com.uj.study.model.lambdasinaction.Dish.menu;
 import static java.util.Comparator.comparingInt;
@@ -54,7 +54,7 @@ public class Grouping {
      * @return
      */
     private static Map<Dish.Type, Set<String>> groupDishTagsByType() {
-        return menu.stream().collect(groupingBy(Dish::getType, flatMapping(dish -> Dish.dishTags.get( dish.getName() ).stream(), toSet())));
+        return menu.stream().collect(groupingBy(Dish::getType, flatMapping(dish -> Dish.dishTags.get(dish.getName()).stream(), toSet())));
     }
 
     /**
@@ -145,5 +145,42 @@ public class Grouping {
                         else if (dish.getCalories() <= 700) return CaloricLevel.NORMAL;
                         else return CaloricLevel.FAT; },
                         toSet() )));
+    }
+
+    public Map<Artist, Long> numberOfAlbums(Stream<Album> albums) {
+        return albums.collect(groupingBy(album -> album.getMainMusician(), counting()));
+    }
+
+    public Map<Artist, Integer> numberOfAlbumsDumb(Stream<Album> albums) {
+        // BEGIN NUMBER_OF_ALBUMS_DUMB
+        Map<Artist, List<Album>> albumsByArtist
+                = albums.collect(groupingBy(album -> album.getMainMusician()));
+
+        Map<Artist, Integer> numberOfAlbums = new HashMap<>();
+        for (Map.Entry<Artist, List<Album>> entry : albumsByArtist.entrySet()) {
+            numberOfAlbums.put(entry.getKey(), entry.getValue().size());
+        }
+        return numberOfAlbums;
+    }
+
+    public Map<Artist, List<String>> nameOfAlbumsDumb(Stream<Album> albums) {
+        Map<Artist, List<Album>> albumsByArtist =
+                albums.collect(groupingBy(album ->album.getMainMusician()));
+
+        Map<Artist, List<String>>  nameOfAlbums = new HashMap<>();
+        for(Map.Entry<Artist, List<Album>> entry : albumsByArtist.entrySet()) {
+            nameOfAlbums.put(entry.getKey(), entry.getValue()
+                    .stream()
+                    .map(Album::getName)
+                    .collect(toList()));
+        }
+        return nameOfAlbums;
+    }
+    // END NAME_OF_ALBUMS_DUMB
+
+    // BEGIN NAME_OF_ALBUMS
+    public Map<Artist, List<String>> nameOfAlbums(Stream<Album> albums) {
+        return albums.collect(groupingBy(Album::getMainMusician,
+                mapping(Album::getName, toList())));
     }
 }

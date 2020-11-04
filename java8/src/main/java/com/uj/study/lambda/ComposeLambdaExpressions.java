@@ -1,7 +1,6 @@
 package com.uj.study.lambda;
 
 import com.uj.study.lambda.entity.Apple;
-import javafx.beans.binding.Bindings;
 
 import java.util.ArrayList;
 import java.util.Arrays;

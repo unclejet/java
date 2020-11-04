@@ -1,4 +1,4 @@
-package com.uj.study.lambda;
+package com.uj.study.functional;
 
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;

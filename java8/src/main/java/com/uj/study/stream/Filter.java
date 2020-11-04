@@ -1,6 +1,5 @@
 package com.uj.study.stream;
 
-import com.sun.org.apache.xerces.internal.dom.PSVIAttrNSImpl;
 import com.uj.study.model.lambdasinaction.Dish;
 
 import java.util.Arrays;
