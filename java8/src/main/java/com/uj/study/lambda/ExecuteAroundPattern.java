@@ -5,7 +5,7 @@ import java.io.*;
 /**
  * @author ：unclejet
  * @date ：Created in 2020/10/4 上午9:56
- * @description：
+ * @description： 环绕模式， 行为参数化
  * @modified By：
  * @version:
  */
@@ -47,11 +47,8 @@ public class ExecuteAroundPattern {
 
     }
 
-
     @FunctionalInterface
     public interface BufferedReaderProcessor {
         String process(BufferedReader b) throws IOException;
     }
-
-
 }
