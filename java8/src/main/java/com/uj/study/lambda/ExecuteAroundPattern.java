@@ -30,8 +30,7 @@ public class ExecuteAroundPattern {
         return new FileReader(file);
     }
 
-    public static void main(String ...args) throws IOException{
-
+    public static void main(String ...args) throws IOException {
         // method we want to refactor to make more flexible
         String result = processFileLimited();
         System.out.println(result);
@@ -44,7 +43,6 @@ public class ExecuteAroundPattern {
 
         String twoLines = processFile((BufferedReader b) -> b.readLine() + b.readLine());
         System.out.println(twoLines);
-
     }
 
     @FunctionalInterface
