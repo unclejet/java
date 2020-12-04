@@ -97,6 +97,7 @@ public class Mapping {
         public Stream<Artist> getMusicians();
 
         public default Stream<Artist> getAllMusicians() {
+            //流合并
             return getMusicians().flatMap(artist -> concat(Stream.of(artist), artist.getMembers()));
         }
 
