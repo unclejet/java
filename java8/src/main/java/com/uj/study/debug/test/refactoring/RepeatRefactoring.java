@@ -49,19 +49,19 @@ public class RepeatRefactoring {
      * 使用流重构命令式的 Order 类
      * @return
      */
-    public long countRunningTime() {
+    public long countRunningTimeStream() {
         return albums.stream()
                 .mapToLong(album -> album.getTracks()
                         .mapToLong(track -> track.getLength())
                         .sum())
                 .sum();
     }
-    public long countMusicians() {
+    public long countMusiciansStream() {
         return albums.stream()
                 .mapToLong(album -> album.getMusicians().count())
                 .sum();
     }
-    public long countTracks() {
+    public long countTracksStream() {
         return albums.stream()
                 .mapToLong(album -> album.getTracks().count())
                 .sum();
@@ -78,17 +78,17 @@ public class RepeatRefactoring {
                 .sum();
     }
 
-    public long countTracks() {
+    public long countTracksDomain() {
         return countFeature(album -> album.getTracks().count());
     }
 
-    public long countRunningTime() {
+    public long countRunningTimeDomain() {
         return countFeature(album -> album.getTracks()
                 .mapToLong(track -> track.getLength())
                 .sum());
     }
 
-    public long countMusicians() {
+    public long countMusiciansDomain() {
         return countFeature(album -> album.getMusicians().count());
     }
 
