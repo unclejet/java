@@ -1,4 +1,4 @@
-package com.uj.study.design.patterns.strategy;
+package com.uj.study.design.patterns.strategy.example1;
 
 /**
  * @author ：UncleJet
