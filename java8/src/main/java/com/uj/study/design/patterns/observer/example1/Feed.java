@@ -1,4 +1,4 @@
-package com.uj.study.design.patterns.observer;
+package com.uj.study.design.patterns.observer.example1;
 
 
 import java.util.ArrayList;
