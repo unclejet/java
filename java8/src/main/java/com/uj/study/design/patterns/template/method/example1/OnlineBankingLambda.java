@@ -1,4 +1,4 @@
-package com.uj.study.design.patterns.template.method;
+package com.uj.study.design.patterns.template.method.example1;
 
 import java.util.function.Consumer;
 
