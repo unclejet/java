@@ -1,4 +1,4 @@
-package com.uj.study.parallel.future;
+package com.uj.study.concurrency.future;
 
 /**
  * @author ：UncleJet
