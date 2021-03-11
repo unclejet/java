@@ -32,6 +32,7 @@ public class ComposeLambdaExpressions {
 
     /**
      * 比较器复合
+     * 倒序
      */
     public void composingComparators() {
         Comparator<Apple> c = comparing(Apple::getWeight);
